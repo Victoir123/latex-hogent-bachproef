@@ -1,0 +1,81 @@
+%%=============================================================================
+%% Conclusie
+%%=============================================================================
+
+\chapter{Conclusie}%
+\label{ch:conclusie}
+
+% TODO: Trek een duidelijke conclusie, in de vorm van een antwoord op de
+% onderzoeksvra(a)g(en). Wat was jouw bijdrage aan het onderzoeksdomein en
+% hoe biedt dit meerwaarde aan het vakgebied/doelgroep? 
+% Reflecteer kritisch over het resultaat. In Engelse teksten wordt deze sectie
+% ``Discussion'' genoemd. Had je deze uitkomst verwacht? Zijn er zaken die nog
+% niet duidelijk zijn?
+% Heeft het onderzoek geleid tot nieuwe vragen die uitnodigen tot verder 
+%onderzoek?
+
+In dit onderzoek is de onderzoeksvraag "Hoe kan klantsegmentatie op basis van aankoopgedrag de nauwkeurigheid van salesvoorspellingen verbeteren?" beantwoord aan de hand van een proof-of-concept.
+
+\vspace{1 em}
+
+Dit onderzoek en de uitgewerkte proof-of-concepts vormen de basis voor het inzetten van salesvoorspellingen binnen IPCOM NV. Door klantsegmentatie te combineren met regressiemodellen worden nauwkeurigere voorspellingen mogelijk gemaakt, wat financiële managers ondersteunt bij het plannen van budgetten en het nemen van strategische beslissingen.
+
+\vspace{1 em}
+
+Allereerst werd in de fase \textit{Salesvoorspellingsmodellen} van de proof-of-concept een werden enkele regressiemodellen uitgewerkt, waaronder lineaire regressie, Random Forest en XGBoost, evenals het forecastmodel SARIMA. Deze modellen werden met elkaar vergeleken om de volgende deelvragen te beantwoorden:
+
+\begin{itemize}
+    \item Wat is efficiënter bij het voorspellen van sales, forecastmethoden zoals SARIMA of regressiemodellen?
+    \item Welke regressiemodellen presteren het best bij het voorspellen van sales?
+\end{itemize}
+
+\vspace{1 em}
+
+Uit de resultaten bleek dat SARIMA in deze context het slechtst presterende model was. Daarom kan worden geconcludeerd dat regressiemodellen hier efficiënter zijn, op basis van precisie.
+
+\vspace{1 em}
+
+Daarnaast blijkt uit de vergelijking van alle regressiemodellen kon ook worden geconcludeerd dat zonder klantsegmentatie het lineaire regressiemodel het beste presteerde, gebaseerd op de maatstaven RMSE, MSE en MAE, vergeleken met XGBoost en Random Forest.
+
+\vspace{1 em} 
+
+Ten slotte werden alle regressiemodellen gecombineerd met de klantsegmentatie uit fase \textit{Klantsegmentatie} van de proof-of-concept. Hiermee konden de volgende deelvragen worden beantwoord:
+
+\begin{itemize}
+    \item Hoe kan klantsegmentatie effectief worden geïntegreerd in een regressiemodel voor salesvoorspellingen om de nauwkeurigheid te verbeteren?
+    \item Welke clusteringtechnieken, zoals K-means, GMM, DBSCAN en K-Modes, leveren de meest betekenisvolle klantsegmenten op voor het verbeteren van salesvoorspellingen?
+    \item Welke regressiemodellen presteren het best bij het voorspellen van sales in combinatie met klantsegmentatie?
+\end{itemize}
+
+Tijdens het uitvoeren van \textit{Regressiemodellen met klantsegmentatie} werd de meest effectieve manier gevonden om klantsegmentatie te integreren in de regressiemodellen. Dit gebeurde door elk cluster aan de bijbehorende klanten toe te wijzen en bij het samenbrengen van de maandelijkse data de splitsing per cluster te behouden. Op deze manier werd er per cluster en per maand een voorspelling gemaakt.
+
+\vspace{1 em} 
+
+Op basis van de resultaten van alle gecombineerde modellen bleek dat GMM over het algemeen de beste prestaties leverde voor zowel Random Forest als XGBoost. K-means (2 clusters) leverde in combinatie met Random Forest het beste resultaat op, maar was tegelijkertijd het slechtste segmentatiemodel in combinatie met XGBoost. K-means presteerde gemiddeld bij beide modellen, terwijl DBSCAN voor XGBoost het beste segmentatiemodel was, maar minder goed presteerde in combinatie met Random Forest.
+
+\vspace{1 em} 
+
+Hierdoor is het moeilijk om eenduidig te bepalen welk klantsegmentatiemodel het beste is. Wel kan worden gesteld dat K-means (2 clusters) het beste presterende gecombineerde model opleverde, terwijl GMM de beste algemene prestaties behaalde over beide regressiemodellen, Random Forest en XGBoost. Het slechtste model is duidelijk aan te wijzen, aangezien K-modes, hoewel het in beide modellen enige verbetering liet zien ten opzichte van geen segmentatie, duidelijk minder goed presteerde dan de andere klantsegmentatiemodellen.
+
+
+\vspace{1 em} 
+
+Daarnaast was het best presterende regressiemodel in combinatie met klantsegmentatie het Random Forest-model. Dit model presteerde met elk segmentatiemodel beter dan het beste regressiemodel zonder segmentatie op basis van RMSE. Dit toont aan dat Random Forest het meeste voordeel haalt uit klantsegmentatie. 
+
+\vspace{1 em} 
+
+Bij XGBoost presteerden alle modellen beter met klantsegmentatie, maar slechts twee modellen deden het beter dan het beste regressiemodel zonder segmentatie op basis van RMSE. Dit toont aan dat XGBoost wel voordeel haalt uit klantsegmentatie maar niet zoveel vergeleken met Random Forest.
+
+\vspace{1 em} 
+
+Daarnaast liet het lineaire regressiemodel, dat vóór de integratie van klantsegmentatie het nauwkeurigst presteerde, geen enkele verbetering zien door het gebruik van klantsegmentatie. Hieruit kunnen we concluderen dat lineaire regressie geen voordeel haalt uit de segmentatie van klanten.
+
+\vspace{1 em} 
+
+Ten slotte is de onderzoeksvraag "Kan klantsegmentatie op basis van aankoopgedrag de nauwkeurigheid van salesvoorspellingen verbeteren?" beantwoord. Uit de resultaten van de laatste fase van het proof-of-concept blijkt dat het gebruik van klantsegmentatie duidelijke verbeteringen oplevert. Het beste resultaat werd behaald met het Random Forest-model in combinatie met K-means (2 clusters).
+
+\vspace{1 em} 
+
+Dit onderzoek had op bepaalde vlakken nog verder verbeterd kunnen worden, bijvoorbeeld door technieken zoals quantization en andere optimalisaties toe te voegen. Deze zijn echter niet meegenomen, omdat de focus lag op het bewijzen van de onderzoeksvraag. In de context van IPCOM NV kunnen deze verbeteringen in een volgende fase alsnog worden geïmplementeerd.
+
+

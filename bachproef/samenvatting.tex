@@ -1,0 +1,62 @@
+%%=============================================================================
+%% Samenvatting
+%%=============================================================================
+
+% TODO: De "abstract" of samenvatting is een kernachtige (~ 1 blz. voor een
+% thesis) synthese van het document.
+%
+% Een goede abstract biedt een kernachtig antwoord op volgende vragen:
+%
+% 1. Waarover gaat de bachelorproef?
+% 2. Waarom heb je er over geschreven?
+% 3. Hoe heb je het onderzoek uitgevoerd?
+% 4. Wat waren de resultaten? Wat blijkt uit je onderzoek?
+% 5. Wat betekenen je resultaten? Wat is de relevantie voor het werkveld?
+%
+% Daarom bestaat een abstract uit volgende componenten:
+%
+% - inleiding + kaderen thema
+% - probleemstelling
+% - (centrale) onderzoeksvraag
+% - onderzoeksdoelstelling
+% - methodologie
+% - resultaten (beperk tot de belangrijkste, relevant voor de onderzoeksvraag)
+% - conclusies, aanbevelingen, beperkingen
+%
+% LET OP! Een samenvatting is GEEN voorwoord!
+
+%%---------- Nederlandse samenvatting -----------------------------------------
+%
+% TODO: Als je je bachelorproef in het Engels schrijft, moet je eerst een
+% Nederlandse samenvatting invoegen. Haal daarvoor onderstaande code uit
+% commentaar.
+% Wie zijn bachelorproef in het Nederlands schrijft, kan dit negeren, de inhoud
+% wordt niet in het document ingevoegd.
+
+\IfLanguageName{english}{%
+\selectlanguage{dutch}
+\chapter*{Samenvatting}
+
+\selectlanguage{english}
+}{}
+
+%%---------- Samenvatting -----------------------------------------------------
+% De samenvatting in de hoofdtaal van het document
+ 
+\chapter*{\IfLanguageName{dutch}{Samenvatting}{Abstract}}
+
+
+Dit onderzoek gaat na of het gebruik van klantsegmentatie op basis van hun koopgedrag de nauwkeurigheid van een regressievoorspellingsmodel kan verbeteren. Door klanten in verschillende groepen in te delen op basis van hun aankoopgedrag, kan een model beter rekening houden met specifieke patronen en variaties binnen de dataset en nauwkeurigere voorspellingen maken.
+
+\vspace{1em} 
+
+Een uitgebreid plan werd uitgevoerd, waarbij de resultaten werden geanalyseerd voor IPCOM NV, met specifieke focus op het dochterbedrijf ISOPARTNER NL, waar de data werd verzameld. Dit onderzoek werd uitgevoerd met de Microsoft Fabric-omgeving, waarbij specifiek gebruik werd gemaakt van Dataflows Gen2 voor het voorbereiden en opschonen van de data, Lakehouses voor de opslag ervan, en Machine Learning-notebooks voor de laatste schoonmaakstappen, het trainen en toepassen van het model.
+
+\vspace{1em}
+
+Binnen deze omgeving werd historische verkoopdata op artikelniveau verzameld en geanalyseerd om klanten te groeperen op basis van hun aankoopgedrag, zoals patronen in hun uitgaven, aankoopfrequentie en productvoorkeuren, met behulp van segmentatiemodellen. Vervolgens werd dit gebruikt in regressiemodellen om te bepalen of de voorspellingen nauwkeuriger werden door klantsegmentatie. De regressiemodellen werden afzonderlijk voor elk klantsegment toegepast, zodat er voor elk segment een specifieke voorspelling werd gemaakt.
+
+\vspace{1em}
+
+De resultaten zijn beoordeeld op basis van nauwkeurigheid van het model en dit werd gemeten door verschillende maatstaven zoals de Mean Absolute Error (MAE), Root Mean Squared Error (RMSE) en  Mean Squared Error (MSE). Uit de resultaten van het onderzoek blijkt dat de klantsegmentatie effectief een positieve bijdrage heeft aan de precisie van de voorspellingen met behulp van een regressie model. Dit onderzoek biedt inzicht in hoe klantendata effectief kan worden ingezet voor verdere optimalisaties binnen de Machine Learning-tools van Microsoft Fabric.
+

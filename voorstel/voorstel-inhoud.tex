@@ -1,0 +1,137 @@
+%---------- Inleiding ---------------------------------------------------------
+
+% TODO: Is dit voorstel gebaseerd op een paper van Research Methods die je
+% vorig jaar hebt ingediend? Heb je daarbij eventueel samengewerkt met een
+% andere student?
+% Zo ja, haal dan de tekst hieronder uit commentaar en pas aan.
+
+%\paragraph{Opmerking}
+
+% Dit voorstel is gebaseerd op het onderzoeksvoorstel dat werd geschreven in het
+% kader van het vak Research Methods dat ik (vorig/dit) academiejaar heb
+% uitgewerkt (met medesturent VOORNAAM NAAM als mede-auteur).
+% 
+
+\section{Inleiding}%
+\label{sec:inleiding}
+
+
+Het voorspellen van sales en winst is een essentieel proces voor elk bedrijf dat strategische beslissingen wil nemen of financiële plannen wil opstellen. In de huidige tijd is het bijna onmogelijk om dit effectief te doen zonder gebruik te maken van data-analyse en andere technieken zoals klantsegmentatie. Bedrijven worden geconfronteerd met een steeds dynamischere markt, wat ervoor zorgt dat traditionele voorspellingsmethoden vaak tekortschieten. 
+
+De doelgroep van dit onderzoek richt zich specifiek op managers en analisten in commerciële en financiële functies binnen bedrijven. Commercieel managers zijn verantwoordelijk voor het optimaliseren van verkoopstrategieën, terwijl financiële analisten gefocust zijn op het opstellen van nauwkeurige budgetten. Beide rollen zijn direct afhankelijk van betrouwbare en data gedreven voorspellingen om strategische beslissingen te ondersteunen.
+
+Elk bedrijf wil de meest accurate voorspellingen om deze beslissingen op te baseren, maar de complexiteit van klantgedrag en marktveranderingen maakt dit steeds moeilijker. Traditionele voorspellingsmethoden schieten vaak tekort, omdat ze niet genoeg rekening houden met de dynamische behoeftes van klanten. Dit onderzoek richt zich op de vraag hoe het categoriseren van klanten op basis van hun aankoopgedrag de nauwkeurigheid van salesvoorspellingen kan verbeteren. Het doel is om inzicht te krijgen in hoe klantsegmentatie de precisie van voorspellingsmodellen kan verbeteren, zodat bedrijven beter geïnformeerde strategische keuzes kunnen maken.
+
+In dit onderzoek worden verschillende deelvragen beantwoord.Ten eerste wordt onderzocht welke soorten klantdata het meest relevant zijn voor het begrijpen van koopgedrag en het voorspellen van toekomstige sales, aangezien deze data essentieel zijn voor het vormen van effectieve klantsegmenten. Daarnaast wordt gekeken naar welke methoden en technieken binnen Machine Learning en Python het beste kunnen worden toegepast om foutieve data te identificeren en te corrigeren tijdens de data-integratie, zodat betrouwbare input voor de voorspellingsmodellen wordt gegarandeerd. 
+
+Vervolgens wordt onderzocht welke clusteringtechnieken, zoals K-means of hiërarchische clustering, de meest betekenisvolle klantsegmenten opleveren voor het verbeteren van salesvoorspellingen. Dit wordt aangevuld door de vraag welke regressiemodellen de beste prestaties leveren voor het voorspellen van sales. Tot slot wordt onderzocht welke methoden effectief kunnen worden toegepast om klantsegmentatie te integreren in een regressiemodel voor salesvoorspellingen, zodat het model de nauwkeurigheid van de voorspellingen verbetert.
+
+Het eindresultaat van dit onderzoek is een proof-of-concept voor het bedrijf IPCOM NV, waarbij de nauwkeurigheid van salesvoorspellingen met en zonder klantsegmentatie wordt vergeleken. Het succes van deze bachelorproef wordt bepaald door het aantonen dat klantsegmentatie de precisie van de voorspellingen verbetert.
+
+%---------- Stand van zaken ---------------------------------------------------
+
+\section{Literatuurstudie}%
+\label{sec:literatuurstudie}
+
+Een vraag die veel managers zich stellen, is waarom het zo belangrijk is om sales en winst te voorspellen. Zoals beschreven in Sales Forecasting Management van \textcite{JohnT.Mentzer2004}, is het antwoord simpel: elke keer dat er een plan wordt gemaakt, wordt er impliciet ook een voorspelling gemaakt. Dit geldt voor zowel individuen als organisaties en vormt de basis voor strategisch plannen. Wanneer een organisatie financiële plannen maakt op basis van verwachte verkoopcijfers, helpt een nauwkeurige voorspelling om deze doelen realistisch en haalbaar te maken. Slechte voorspellingen leiden dan ook tot slechte financiële plannen.
+
+
+Traditionele voorspellingsmethoden voor sales zijn vaak gebaseerd op tijdreeksen, dit betekent dat de vraag voor een product in het verleden kan gebruikt worden om de toekomstige vraag voor dit product te voorspellen. Deze methode werkt goed in markten waar de vraag stabiel blijft, maar kent beperkingen in meer dynamische markten. Het probleem is dat de vraag ook beïnvloed wordt door externe factoren zoals weersomstandigheden, economische ontwikkelingen, seizoensgebonden trends, consumentenvoorkeuren of zelfs veranderingen in het algemene sentiment. Tijdreeksen kunnen hier geen rekening mee houden, dit leidt tot minder nauwkeurige voorspellingen wanneer deze externe factoren groot zijn in belang. Een oplossing hiervoor zou een ander soort van voorspellingsmethoden zijn zoals causaal modelleren, met deze techniek kan je rekening houden met economische variabele, weersomstandigheden en marketingsstrategieën \autocite{UsugaCadavid2018}
+
+In de literatuur worden verschillende soorten voorspellingen onderscheiden volgens \textcite{UsugaCadavid2018}, zoals vraagvoorspellingen (demand forecasting) en sales voorspellingen (sales forecasting). In dit onderzoek wordt de focus gelegd op sales voorspellingen. Sales voorspelling is gebaseerd op gegevens die direct zijn verzameld uit verkooppunten, zoals winkeltransacties. Deze gegevens zijn gevoelig voor invloeden zoals promoties of voorraadtekorten, waardoor sales voorspellingen vaak de effectiviteit van promoties en de beschikbaarheid van producten weerspiegelen, in plaats van de werkelijke vraag. Aan de andere kant richt vraagvoorspelling zich op het identificeren van de werkelijke marktvraag, waarbij de effecten van promoties en voorraadtekorten zijn gecorrigeerd. Het doel is om een nauwkeuriger beeld te krijgen van de vraag, onafhankelijk van tijdelijke invloeden zoals marketingcampagnes of voorraadbeheer. Dit verschil, hoewel subtiel, heeft een grote invloed op de de manier waarop voorspellingen worden gemaakt en hoe bedrijven hun supply chain kunnen afstemmen op de werkelijke marktvraag in plaats van alleen verkoopaantallen .
+
+Big data biedt veel voordelen voor salesvoorspellingen, maar de integratie ervan is allesbehalve eenvoudig. \textcite{Boone2019} bespreken de strategische en praktische uitdagingen waarmee bedrijven worden geconfronteerd bij het incorporeren van big data in hun voorspellingsmodellen. Op strategisch niveau moet elk bedrijf beslissen of en hoeveel big data-technologieën ze willen integreren. Dit besluit hangt af van de potentiële voordelen van het gebruik van big data in vergelijking met de kosten van het verzamelen en analyseren van deze gegevens. 
+
+Big data heeft het potentieel om productvoorspellingen te verbeteren en waardevolle inzichten te geven in klantgedrag. Echter, de praktische uitdaging van demand planners is de enorme hoeveelheid gegevens die verzameld wordt, zoals bijvoorbeeld de 2,5 petabytes aan data die Walmart elke uur verzamelt. De vraag die hierbij opkomt, is welke data bewaard moeten worden en hoe lang. 
+
+Een belangrijk obstakel bij het gebruik van big data voor vraagvoorspellingen is de invloed van menselijke beoordelingen. Veel bedrijven baseren hun voorspellingen op "gevoel" en passen statistische modellen aan op basis van factoren die vraagvoorspellers moeilijk kunnen meten zoals marketingactiviteiten of seizoenstrends. Hoewel menselijke beoordeling de voorspellingen kan verbeteren, introduceert het vaak vooroordelen die de nauwkeurigheid verminderen. Boone et al. suggereren dat big data mogelijk de negatieve effecten van deze "aanpassingen" kan verminderen, maar ze erkennen dat de praktische integratie van big data in ERP-systemen veel uitdagingen met zich meebrengt
+
+
+
+
+
+In een onderzoek uitgevoerd door \textcite{Neba2024}  op een Walmart-dataset werd ontdekt dat traditionele lineaire modellen vaak niet in staat zijn om de complexe, niet-lineaire relaties binnen retaildata vast te leggen. Deze modellen konden de ingewikkelde interacties tussen verschillende variabelen niet effectief begrijpen. Aan de andere kant toonden geavanceerdere ensemble-methoden, zoals Random Forest en Gradient Boosting Machines (GBM), aanzienlijk betere voorspellende nauwkeurigheid door de uitkomsten van meerdere besluitbomen te combineren. Deze methoden wisten verborgen patronen te identificeren en de voorspellingsprecisie te verbeteren.
+
+Van de geavanceerde modellen bleek XGBoost het beste te presteren, met de laagste Mean Absolute Error (MAE) en Root Mean Squared Error (RMSE). Dit onderstreepte de superieure capaciteiten van XGBoost voor het maken van nauwkeurige verkoopvoorspellingen. De verbeterde prestaties werden toegeschreven aan de efficiënte implementatie van gradient boosting, evenals aan technieken zoals regularisatie en het omgaan met ontbrekende waarden, waardoor XGBoost het model van keuze werd voor accurate verkoopvoorspellingen.
+
+
+Volgens Pareto’s 80/20-regel is een klein percentage van de klanten vaak verantwoordelijk voor een groot deel van de omzet van een bedrijf. Hoewel dit principe in veel gevallen wordt waargenomen, is het belangrijk om op te merken dat dit niet altijd strikt van toepassing is. Dit betekent dat het behouden van deze klanten enorm belangrijk en soms zelf belangrijker als nieuwe klanten aantrekken. \textcite{Wu2011} benadrukken in hun onderzoek naar klantsegmentatie het belang van het begrijpen van klantgedrag. Ze stellen at bedrijven effectieve marketingstrategieën te ontwikkelen op basis van klantsegmenten, waarbij ze de koopgewoonten van klanten analyseren. 
+
+Een natuurlijk gevolg van klantsegmentatie is dat je klanten beter kunt bedienen door prijzen of aanbiedingen aan te passen aan hun individuele behoeften. Deze aanpak maakt het mogelijk voor bedrijven om prijzen of aanbiedingen af te stemmen op de specifieke kenmerken en behoeften van individuele klanten, in plaats van gebruik te maken van algemene en uniforme strategieën.
+
+Een van de grootste voordelen van een gepersonaliseerde benadering is de positieve invloed op klantbehoud. Klanten die het gevoel hebben dat producten of diensten eerlijk en relevant zijn voor hun situatie, blijven loyaal aan het bedrijf. Daarnaast versterkt personalisatie het vertrouwen van klanten, doordat zij het gevoel krijgen als individu te worden behandeld in plaats van slechts een nummer in een database te zijn. Zo kunnen bijvoorbeeld trouwe klanten beloond worden met speciale aanbiedingen of kortingen, wat hun loyaliteit versterkt. Daarentegen kan een niet-gepersonaliseerde aanpak ervoor zorgen dat klanten zich niet gewaardeerd voelen of het idee krijgen dat ze te veel betalen. Dit vergroot de kans dat ze overstappen naar een concurrent, wat uiteindelijk kan resulteren in een hoger klantverloop.\autocite{Adeniran2024}
+
+
+% Voor literatuurverwijzingen zijn er twee belangrijke commando's:
+% \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
+%   geen onderdeel is van de zin.
+% \textcite{KEY} => Auteur (jaartal)  Gebruik dit als de auteursnaam wel een
+%   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
+%   ...'')
+
+
+%---------- Methodologie ------------------------------------------------------
+
+\section{Methodologie}%
+\label{sec:methodologie}
+
+
+\textbf{Fase 1: Data verzameling}
+
+In deze fase wordt de benodigde data verzameld voor de klantsegmentatie en de salesvoorspellingen uit te voeren. De gegevens komen uit interne bronnen om een compleet overzicht van het klantgedrag en de verkoop te verkrijgen.
+
+De focus ligt op het verzamelen van de verkoop- en artikeldata van Isopartner Nederland, een entiteit binnen IPCOM NV, aangezien deze data de meest accurate en betrouwbare bron vormt voor het opzetten van een proof of concept. De verzamelde data omvat transactiebedragen, marges, artikeldata, klant-ID en de datum van de  transactie. Het doel is om alle data dat een inzicht zou geven in het koopgedrag van de klant en voor het voorspellen van toekomstige sales te verzamelen. 
+
+Daarnaast wordt er interne data verzameld die Isopartner Nederland momenteel niet heeft, namelijk gegevens over het aantal werkbare werkdagen per maand. Dit is van belang omdat het aantal werkdagen in een maand invloed kan hebben op de verkoopresultaten, bijvoorbeeld doordat langere maanden met meer werkdagen doorgaans tot hogere verkopen leiden. Deze gegevens zullen persoonlijk opgevraagd worden bij de contactpersonen binnen het bedrijf.
+
+Op het einde van deze fase is alle nodige data verzameld en beschikbaar voor gebruik. Daarnaast wordt in deze fase de deelvraag beantwoord: "Welke soorten klantdata zijn het meest relevant voor het begrijpen van koopgedrag en het voorspellen van toekomstige sales?" Aangezien meeste data al beschikbaar is in de dataflows van Microsoft Fabric, wordt er voor deze fase 2 weken verwacht.
+
+
+\textbf{Fase 2: Data-integratie en voorbereiding}
+
+Nadat we alle data verzameld hebben in fase 1, worden de verschillende gegevensbronnen samengevoegd en voorbereid voor verdere analyses. Het doel is om een consistente dataset te creëren die gebruikt kan worden voor klantsegmentatie en salesvoorspellingen.
+
+De verkoopdata, artikeldata, klantdata en de data over aantal werkdagen per maand worden samengebracht in één dataflow binnen de Microsoft Fabrics omgeving. Deze data wordt vervolgens opgeslagen en verder geoptimaliseerd in een datawarehouse binnen dezelfde Microsoft Fabric-omgeving.
+
+Na het succesvol wegschrijven van de data, wordt er verder gewerkt aan het identificeren van potentiële foutieve data die niet gebruikt mag worden voor analyses. Dit omvat het opsporen van ontbrekende waarden, dubbele records of onjuiste gegevens. Hiervoor wordt gebruik gemaakt van Machine Learning Notebooks binnen Microsoft Fabric, waarbij Python Libraries zoals Panda’s worden toegepast om foutieve data te detecteren en aan te passen. 
+
+Het eindproduct van deze fase zou een consistente dataset zijn, gereed voor verdere analyses en modellering. Ook wordt de deelvraag "Welke methoden en technieken binnen Machine Learning en Python kunnen het best worden gebruikt om foutieve data te identificeren en te corrigeren tijdens de data-integratie?" beantwoord. De geschatte tijdsduur voor deze fase is 1 week en 3 dagen.
+
+
+
+
+\textbf{Fase 3: Klantsegmentatie en gedragspatronen analyse}
+
+In deze fase ligt de focus op het uitvoeren van Exploratory Data Analysis (EDA) op de verzamelde data en het toepassen van clusteringtechnieken.  Het doel is het identificeren van welke variabelen het meest invloed hebben op de clustering en het opzetten van een volledig clusteringmodel. 
+
+Tijdens de EDA worden de belangrijkste kenmerken van de data, zoals aankoopgedrag, productinformatie en werkbare werkdagen, grondig geanalyseerd met behulp van Pandas en Matplotlib. Dit helpt bij het bepalen van welke variabelen het meest bepalend zijn voor de clustering van de gegevens. Dit proces kan het identificeren van afwijkingen en correlaties tussen verschillende factoren vergemakkelijken.
+
+Door clusteringalgoritmes zoals K-means of hiërarchische clustering toe te passen met behulp van Scikit-learn, worden de gegevens verdeeld in groepen die vergelijkbare eigenschappen vertonen. Daarna vergelijken we de resultaten van beide algoritmes om te bepalen welk model de meest betekenisvolle clusters oplevert. Dit gebeurt door de clusterresultaten te analyseren op basis van hun interne samenhang en de geschiktheid voor het gewenste resultaat, zoals het verbeteren van de nauwkeurigheid van salesvoorspellingen.
+
+Het eindresultaat van deze fase is een geoptimaliseerd clusteringmodel dat klantsegmenten creëert op basis van hun aankoopgedrag, productinformatie en werkbare werkdagen. Dit model vormt de basis voor het verder verfijnen van salesvoorspellingen. In deze fase wordt tevens de deelvraag beantwoord: "Welke clusteringtechnieken, zoals K-means of hiërarchische clustering, leveren de meest betekenisvolle klantsegmenten op voor het verbeteren van salesvoorspellingen?" Voor deze fase wordt 3 weken verwacht.
+
+\textbf{Fase 4: Salesvoorspellingen met regressiemodellen}
+
+Het doel van deze fase is het ontwikkelen van een regressiemodel voor salesvoorspellingen zonder het gebruik van klantsegmentatie, zodat we later de prestaties van dit model kunnen vergelijken met het model dat klantsegmentatie bevat.
+
+Dit wordt bereikt door verschillende regressiemodellen toe te passen, zoals lineaire regressie, decision tree-regressie en random forest-regressie, met behulp van de Python-libraries zoals scikit-learn. Elk model wordt geëvalueerd op basis van hun prestaties, met als belangrijkste metrics de Mean Squared Error (MSE) en Root Mean Squared Error (RMSE). De modellen worden getest door gebruik te maken van een train-test splits en cross-validatie, om ervoor te zorgen dat het gekozen model goed generaliseert naar nieuwe data en niet overfit. 
+
+Het uiteindelijke resultaat van deze fase is het regressiemodel met de laagste MSE en RMSE, dat de basis zal vormen voor de volgende fase, waarin klantsegmentatie wordt geïntegreerd om de voorspellingen verder te verfijnen. De deelvraag die in deze fase beantwoord wordt is: "Welke regressiemodellen leveren de beste prestaties voor het voorspellen van sales?" Deze fase duurt 2 weken.
+
+\textbf{Fase 5: Regressiemodel met klantsegmentatie en vergelijking}
+
+In deze fase wordt het regressiemodel dat eerder is ontwikkeld verder verfijnd door de klantsegmentatie gegevens te integreren. Het doel is om te onderzoeken of het toevoegen van klantsegmentatie leidt tot verbeterde salesvoorspellingen. Dit wordt bereikt door de gegevens van de verschillende klantsegmenten, zoals koopgedrag en andere relevante kenmerken, te gebruiken om het regressiemodel te verbeteren. Het aangepaste model wordt vervolgens vergeleken met het eerdere model zonder klantsegmentatie aan de hand van de Mean Squared Error (MSE) en Root Mean Squared Error (RMSE) om te beoordelen of de segmentatie daadwerkelijk leidt tot een significante verbetering in de nauwkeurigheid van de salesvoorspellingen.
+
+Het eindresultaat van deze fase is een regressiemodel dat de klantsegmentatiegegevens correct verwerkt. Dit zal bijdragen aan het beantwoorden van de hoofdonderzoeksvraag: 'Hoe kan klantsegmentatie de precisie van salesvoorspellingsmodellen verbeteren?' Bovendien wordt in deze fase de deelvraag beantwoord: 'Welke methoden kunnen worden toegepast om klantsegmentatie effectief te integreren in een regressiemodel voor salesvoorspellingen?' Deze fase duurt 2 weken.
+
+
+%---------- Verwachte resultaten ----------------------------------------------
+\section{Verwacht resultaat, conclusie}%
+\label{sec:verwachte_resultaten}
+
+In dit onderzoek wordt verwacht dat het toevoegen van klantsegmentatie aan het regressiemodel een significante verbetering zal opleveren in de nauwkeurigheid van de salesvoorspellingen. Het model met klantsegmentatie wordt verwacht lagere MSE- en RMSE-waarden te vertonen, wat duidt op een meer nauwkeurige voorspelling van de sales. Door klantsegmentatie toe te passen, wordt verondersteld dat de verschillende klantgroepen verschillende koopgedragingen vertonen, waardoor de voorspellingen beter afgestemd kunnen worden op specifieke klantgroepen. Dit zou moeten leiden tot een preciezere voorspelling van de verkoopresultaten.
+
+De meerwaarde voor commerciële functies binnen bedrijven ligt in het beter begrijpen en bedienen van specifieke klantgroepen. Een model met klantsegmentatie kan helpen bij het ontwikkelen van gerichte marketingstrategieën. Dit verhoogt de efficiëntie van verkoopprocessen en kan leiden tot een groei in omzet, klanttevredenheid en mogelijk ook een verbetering van het aankoopbeheer.
+
+Voor financiële functies biedt een model voor nauwkeurige salesvoorspellingen ondersteuning bij het maken van meer financiële beslissingen en budgetplanningen. Financiële analisten kunnen met behulp van deze voorspellingen beter inzicht krijgen in de inkomstenstromen, wat resulteert in verbeterde financiële stabiliteit en planning. Bovendien kunnen ook andere afdelingen, zoals HRM, hiervan profiteren bij het plannen van personeelsbehoeften.
+

@@ -1,0 +1,117 @@
+%%=============================================================================
+%% Methodologie
+%%=============================================================================
+
+\chapter{\IfLanguageName{dutch}{Methodologie}{Methodology}}%
+\label{ch:methodologie}
+
+%% TODO: In dit hoofstuk geef je een korte toelichting over hoe je te werk bent
+%% gegaan. Verdeel je onderzoek in grote fasen, en licht in elke fase toe wat
+%% de doelstelling was, welke deliverables daar uit gekomen zijn, en welke
+%% onderzoeksmethoden je daarbij toegepast hebt. Verantwoord waarom je
+%% op deze manier te werk gegaan bent.
+%% 
+%% Voorbeelden van zulke fasen zijn: literatuurstudie, opstellen van een
+%% requirements-analyse, opstellen long-list (bij vergelijkende studie),
+%% selectie van geschikte tools (bij vergelijkende studie, "short-list"),
+%% opzetten testopstelling/PoC, uitvoeren testen en verzamelen
+%% van resultaten, analyse van resultaten, ...
+%%
+%% !!!!! LET OP !!!!!
+%%
+%% Het is uitdrukkelijk NIET de bedoeling dat je het grootste deel van de corpus
+%% van je bachelorproef in dit hoofstuk verwerkt! Dit hoofdstuk is eerder een
+%% kort overzicht van je plan van aanpak.
+%%
+%% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
+%% en geef het een gepaste titel.
+
+
+
+\section{Data verzameling}
+
+
+In deze fase wordt de benodigde data verzameld voor de klantsegmentatie en de salesvoorspellingen uit te voeren. De gegevens komen uit interne bronnen om een compleet overzicht van het klantgedrag en de verkoop te verkrijgen.
+
+\vspace{1 em}
+
+De focus ligt op het verzamelen van de verkoop- en artikeldata van Isopartner Nederland, een entiteit binnen IPCOM NV, aangezien deze data de meest accurate en betrouwbare bron vormt voor het opzetten van een proof of concept. De verzamelde data omvat transactiebedragen, marges, artikeldata, klant-ID en de datum van de  transactie. Het doel is om alle data dat een inzicht zou geven in het koopgedrag van de klant en voor het voorspellen van toekomstige sales te verzamelen. 
+
+\vspace{1 em}
+
+Daarnaast wordt er interne data verzameld die Isopartner Nederland momenteel niet heeft, namelijk gegevens over het aantal werkbare werkdagen per maand. Dit is van belang omdat het aantal werkdagen in een maand invloed kan hebben op de verkoopresultaten, bijvoorbeeld doordat langere maanden met meer werkdagen doorgaans tot hogere verkopen leiden. Deze gegevens zullen persoonlijk opgevraagd worden bij de contactpersonen binnen het bedrijf.
+
+\vspace{1 em}
+
+Op het einde van deze fase is alle nodige data verzameld en beschikbaar voor gebruik. Aangezien meeste data al beschikbaar is in de dataflows van Microsoft Fabric, wordt er voor deze fase 2 weken verwacht.
+
+\newpage
+
+\section{Data-integratie en voorbereiding}
+
+
+Nadat alle data verzameld is in fase 1, worden de verschillende gegevensbronnen samengevoegd en voorbereid voor verdere analyses. Het doel is om een consistente dataset te creëren die gebruikt kan worden voor klantsegmentatie en salesvoorspellingen.
+
+\vspace{1 em}
+
+De verkoopdata, artikeldata, klantdata en de data over aantal werkdagen per maand worden samengebracht in één dataflow binnen de Microsoft Fabrics omgeving. Deze data wordt vervolgens opgeslagen en verder geoptimaliseerd in een lakehouse binnen dezelfde Microsoft Fabric-omgeving.
+
+\vspace{1 em}
+
+Na het succesvol wegschrijven van de data, wordt er verder gewerkt aan het identificeren van potentiële foutieve data die niet gebruikt mag worden voor analyses. Dit omvat het opsporen van ontbrekende waarden, dubbele records of onjuiste gegevens. Hiervoor wordt gebruikgemaakt van Machine Learning Notebooks binnen Microsoft Fabric, waarbij Python-libraries zoals Panda’s worden toegepast om foutieve data te detecteren en aan te passen. Waar mogelijk worden deze correcties direct doorgevoerd in de dataflows, zodat de gegevens in een goede staat beschikbaar zijn voor verdere verwerking en analyse.
+
+\vspace{1 em}
+
+Het eindproduct van deze fase zou een consistente dataset zijn, gereed voor verdere analyses en modellering. De geschatte tijdsduur voor deze fase is 1 week en 3 dagen.
+
+\newpage
+
+\section{Salesvoorspellingen met regressiemodellen}
+
+
+Het doel van deze fase is het ontwikkelen van regressiemodellen voor salesvoorspellingen zonder het gebruik van klantsegmentatie, zodat de prestaties later vergeleken kunnen worden met modellen waarin klantsegmentatie wel is opgenomen.
+
+\vspace{1 em}
+
+Dit wordt bereikt door verschillende regressiemodellen toe te passen, zoals XGBoost, lineaire regressie en Random Forest-regressie, met behulp van Python-libraries. Elk model wordt geëvalueerd op basis van prestatiemaatstaven zoals Mean Squared Error (MSE), Root Mean Squared Error (RMSE) en Mean Absolute Error (MAE). De modellen worden getest met een train-test splitsing en cross-validatie, zodat wordt gegarandeerd dat het gekozen model goed generaliseert naar nieuwe data en overfitting wordt voorkomen.
+
+\vspace{1 em}
+
+Daarnaast wordt tijdens deze fase ook SARIMA als forecastmodel toegepast, om een vergelijking te kunnen maken tussen regressiemodellen en tijdreeksvoorspellingen.
+
+\vspace{1 em}
+
+Het uiteindelijke resultaat van deze fase zijn drie verschillende regressiemodellen, die later zullen dienen als basis voor de fase Regressiemodellen met klantsegmentatie, waarin wordt onderzocht hoe klantsegmentatie de precisie van voorspellingen beïnvloedt. Daarnaast is er ook een tijdreeksmodel ontwikkeld, maar alleen de regressiemodellen worden meegenomen naar de volgende fase. De deelvragen die worden beantwoord in deze fase zijn: "Welke regressiemodellen presteren het best bij het voorspellen van sales?" en "Wat is efficiënter bij het voorspellen van sales, forecastmethoden zoals SARIMA of regressiemodellen?". Deze fase duurt twee weken.
+
+\newpage
+
+\section{Klantsegmentatie}
+
+
+In deze fase ligt de focus op het toepassen van clusteringtechnieken met als doel het opzetten van een volledig clusteringmodel voor klantsegmentatie. Het doel is om betekenisvolle klantsegmenten te creëren op basis van klantendata.
+
+
+\vspace{1 em}
+
+In deze fase ligt de focus op het toepassen van clusteringalgoritmes zoals K-Means, Gaussian Mixture Models (GMM), DBSCAN en K-Modes met behulp van Scikit-learn, om klanten op basis van hun data in segmenten te groeperen. De resultaten van deze clusteringalgoritmes worden in de fase Regressiemodel met klantsegmentatie vergeleken op basis van hoe goed de verkregen klantsegmenten de precisie van het regressiemodel verbeteren.
+
+\vspace{1 em}
+
+Het eindresultaat van deze fase is het creëren van drie numerieke clusteringmodellen en één categorisch model op basis van klantinformatie en productinformatie. Deze modellen zullen klantsegmenten identificeren, die de basis vormen voor het verder verfijnen van salesvoorspellingen. Voor deze fase wordt een tijdsduur van 3 weken verwacht.
+
+
+\newpage
+
+\section{Regressiemodel met klantsegmentatie}
+
+
+In deze fase worden alle regressiemodellen met alle segmentatiemodellen samengebracht om te onderzoeken of het toevoegen van klantsegmentatie leidt tot verbeterde salesvoorspellingen. Dit wordt bereikt door de clusterinformatie toe te voegen, zodat er voorspellingen per cluster per maand worden gemaakt. Daarna worden alle voorspellingen weer samengevoegd om de precisie van het model te meten aan de hand van de Mean Squared Error (MSE), Root Mean Squared Error (RMSE) en Mean Absolute Error (MAE).
+
+
+\vspace{1 em}
+
+Het eindresultaat van deze fase bestaat uit 12 regressiemodellen, gecombineerd met segmentatiemodellen, die op basis van de vastgestelde maatstaven met elkaar vergeleken kunnen worden. De hoofdonderzoeksvraag, "Kan klantsegmentatie op basis van aankoopgedrag de nauwkeurigheid van salesvoorspellingen verbeteren?", wordt beantwoord. 
+
+\vspace{1 em}
+
+Daarnaast worden de volgende deelvragen beantwoord: “Welke clusteringtechnieken, zoals K-means, GMM, DBSCAN en K-Modes, leveren de meest betekenisvolle klantsegmenten op voor het verbeteren van salesvoorspellingen?”, “Welke regressiemodellen presteren het best bij het voorspellen van sales in combinatie met klantsegmentatie?” en “Hoe kan klantsegmentatie effectief worden geïntegreerd in een regressiemodel voor salesvoorspellingen om de nauwkeurigheid te verbeteren?” Deze fase duurt 2 weken.
